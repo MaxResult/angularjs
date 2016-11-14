@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html ng-app="firstTaskApp">
+<head>
+    <title>Task 1</title>
+    <script src="../node_modules/angular/angular.js"></script>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+
+    <script>
+        var model = {
+            category: "Програмування",
+            books: [
+                { name: "Язык программирования C# 6.0 и платформа .NET 4.6, 7-е издание", author: "Эндрю Троелсен", electronicVersion : true },
+                { name: "Простой Python. Современный стиль программирования", author: "Билл Любанович", electronicVersion : true },
+                { name: "Изучаем Ruby. Серия Head First", author: "Джей Макгаврен", electronicVersion : true  },
+                { name: "Веб-разработка с применением Node и Express. Полноценное использование стека JavaScript", author: "Итан Браун", electronicVersion : false  },
+                { name: "Pro AngularJS", author: "A. Freeman", electronicVersion : false  }
+            ]
+        };
+
+        var courseListApp = angular.module("firstTaskApp", []);
+
+        courseListApp.controller("BookListCtrl", function ($scope) {
+            $scope.data = model;
+
+            $scope.showText = function (passed) {
+                return passed ? "Так" : "Ні";
+            }
+
+        });
+
+    </script>
+
+</head>
+
+<body ng-controller="BookListCtrl">
+<div class="container">
+    <div class="page-header">
+        <h1>
+           Список книг
+        </h1>
+        <h3>Категорія: {{data.category}}. Кількість книг - {{data.books.length}}</h3>
+    </div>
+    <div class="panel">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Назва книги</th>
+                <th>Автор</th>
+                <th>Електронна версія</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="book in data.books">
+                <td>{{book.name}}</td>
+                <td>{{book.author}}</td>
+                <td>{{showText(book.electronicVersion)}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+
