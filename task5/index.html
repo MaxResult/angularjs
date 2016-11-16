@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html ng-app="firstTaskApp">
+<head>
+    <title>Task 5</title>
+    <meta charset="utf-8">
+    <script src="../node_modules/angular/angular.js"></script>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+
+    <script>
+        var courseListApp = angular.module("firstTaskApp", []);
+
+        courseListApp.controller("StyleCtrl", function ($scope) {
+
+            $scope.style = ['first', 'second', 'third'];
+            $scope.checkedStyle = 'first';
+            $scope.checkStyle = function () {
+                
+            }
+        });
+
+        
+
+    </script>
+</head>
+
+<body ng-controller="StyleCtrl">
+    <!--<div class="container" ng-class="{{checkedStyle}}">-->
+
+
+    <!--</div>-->
+    <div>
+        <input type="checkbox" value="1" name="check" ng-checked="checkStyle()">
+        <input type="checkbox" value="2" name="check" ng-checked="checkStyle()">
+        <input type="checkbox" value="3" name="check" ng-checked="checkStyle()">
+
+    </div>
+</body>
+</html>
+

@@ -17,12 +17,16 @@
 
             $scope.showText = function (passed) {
                 return passed ? "Так" : "Ні";
-            }
+            };
+
+            $scope.showMessage = function () {
+                console.log($scope.$id);
+                //console.log(angular.element($0).scope());
+            };
 
         });
 
     </script>
-
 </head>
 
 <body ng-controller="BookListCtrl">
@@ -49,13 +53,17 @@
                 <td>{{book.author}}</td>
                 <td>{{showText(book.electronicVersion)}}</td>
                 <td>
-                    <button type="submit" class="btn btn-default">Деталі</button>
+                    <button type="submit" class="btn btn-default" ng-click="showMessage()">Деталі</button>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+<div>
+
+</div>
+
 </body>
 </html>
 
