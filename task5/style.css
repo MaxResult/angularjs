@@ -1,20 +1,24 @@
-.first{
-    background-color: #2e6da4;
-    color: #ffffff;
+.main{
     height: 200px;
     width: 200px;
+    border: 2px solid #ff6e62;
+}
+
+.first{
+    background-color: #2e6da4;
+
 }
 
 .second{
-    background-color: #79a44f;
-    color: #ffffff;
-    height: 250px;
-    width: 250px;
+    color: #e34bff;
 }
 
 .third{
-    background-color: #a44b40;
-    color: #ffffff;
-    height: 300px;
-    width: 300px;
+    border: 2px dotted #2949a4;
+}
+
+
+
+.element{
+    padding-left: 10px;
 }

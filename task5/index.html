@@ -14,28 +14,24 @@
 
         courseListApp.controller("StyleCtrl", function ($scope) {
 
-            $scope.style = //{1:'first', 2: 'second', 3: 'third'};
-            [
-                {value: 'first'},
-                {value: 'second'},
-                {value: 'third'}
-            ];
-            $scope.checkedStyle = 'first';
-
-            $scope.checkStyle = function () {
-                $scope.checkedStyle = 'second';
+            $scope.styleObj = {
+                main: true,
+                first: false,
+                second: false,
+                size: false
             }
+
         });
     </script>
 </head>
 
 <body ng-controller="StyleCtrl">
-    <div class="radio" ng-repeat="item in style">
-        <label>
-            <input type="radio" name="check"  ng-model="$parent.checkedStyle"  value="{{item.value}}"/> {{item.value}}
-        </label>
+    <div class="container" >
+        <label style="cursor: pointer;"><input type="checkbox" ng-model="styleObj.first" />First </label><br />
+        <label style="cursor: pointer;"><input type="checkbox" ng-model="styleObj.second" />Second </label><br />
+        <label style="cursor: pointer;"><input type="checkbox" ng-model="styleObj.third" />Third </label><br />
+        <div ng-class="styleObj">TEXT</div>
     </div>
-    <div class="test-div" ng-class="checkedStyle">{{checkedStyle}}</div>
 </body>
 </html>
 
