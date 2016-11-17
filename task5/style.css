@@ -1,14 +1,20 @@
 .first{
     background-color: #2e6da4;
     color: #ffffff;
+    height: 200px;
+    width: 200px;
 }
 
 .second{
-    background-color: #6da457;
+    background-color: #79a44f;
     color: #ffffff;
+    height: 250px;
+    width: 250px;
 }
 
 .third{
-    background-color: #a45246;
-    color: #000000;
+    background-color: #a44b40;
+    color: #ffffff;
+    height: 300px;
+    width: 300px;
 }
