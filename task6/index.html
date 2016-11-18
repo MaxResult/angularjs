@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="fifthTaskApp">
 <head>
-    <title>Task 5</title>
+    <title>Task 6</title>
     <meta charset="utf-8">
     <script src="../node_modules/angular/angular.js"></script>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
@@ -13,8 +13,7 @@
         courseListApp.controller("formCtrl", function ($scope) {
 
             $scope.addNewUser = function (userDetails) {
-                $scope.message = userDetails.name
-                        + " (" + userDetails.email + ") (" + userDetails.agreed + ")";
+                console.log(userDetails);
             };
 
             $scope.message = "Ready";
@@ -29,30 +28,41 @@
     </script>
 </head>
 <body>
-<div ng-controller="formCtrl" style="width:350px; margin:10px">
-    <form name="myForm" novalidate ng-submit="addNewUser(newUser)">
-        <div class="well">
-            <div class="form-group">
-                <label>Name:</label>
-                <input name="userName" type="text" class="form-control" ng-model="newUser.name" required>
+<div class="row" style="margin:10px">
+    <div ng-controller="formCtrl" style="width:350px;" class="col-md-4">
+        <form name="myForm" novalidate ng-submit="addNewUser(newUser)">
+            <div class="well">
+                <div class="form-group">
+                    <label>П.І.Б.</label>
+                    <input name="userName" type="text" class="form-control" ng-model="newUser.name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input name="userEmail" type="email" class="form-control" required ng-model="newUser.email">
+                </div>
+                <div class="form-group">
+                    <label>Телефон:</label>
+                    <input name="userTelephone" type="text" class="form-control" required ng-model="newUser.telephone">
+                </div>
+                <div class="form-group">
+                    <label>Пароль:</label>
+                    <input name="userPassword" type="password" class="form-control" required ng-model="newUser.password">
+                </div>
+                <div class="form-group">
+                    <label>Підтвердження паролю:</label>
+                    <input name="userConfirmPassword" type="password" class="form-control" required ng-model="newUser.confirmPassword">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" ng-disabled="myForm.$invalid">
+                    OK
+                </button>
             </div>
-            <div class="form-group">
-                <label>Email:</label>
-                <input name="userEmail" type="email" class="form-control" required ng-model="newUser.email">
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input name="agreed" type="checkbox"
-                           ng-model="newUser.agreed" required>
-                    I agree to the terms and conditions
-                </label>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block" ng-disabled="myForm.$invalid">
-                OK
-            </button>
-        </div>
+        </form>
+    </div>
 
-    </form>
+    <div class="col-md-8">
+
+    </div>
+
 </div>
 </body>
 </html>
