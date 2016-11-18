@@ -5,16 +5,16 @@
 }
 
 .first{
-    background-color: #2e6da4;
+    background-color: lightgreen;
 
 }
 
 .second{
-    color: #e34bff;
+    color: lightcoral;
 }
 
 .third{
-    border: 2px dotted #2949a4;
+    border: 2px dotted lightblue;
 }
 
 
