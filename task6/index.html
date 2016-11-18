@@ -4,11 +4,12 @@
     <title>Task 6</title>
     <meta charset="utf-8">
     <script src="../node_modules/angular/angular.js"></script>
+    <script type="text/javascript" src="../node_modules/ui_utils/angular-ui-utils.min.js"></script>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
 
     <script>
-        var courseListApp = angular.module("fifthTaskApp", []);
+        var courseListApp = angular.module("fifthTaskApp", ['ui.utils']);
 
         courseListApp.controller("formCtrl", function ($scope) {
 
@@ -20,7 +21,7 @@
 
 
             $scope.userList = [
-                {   }
+                { name : "Testname",  email : "testmail@gmail.com", telephone: "+380962345235", password : "12345" }
             ];
 
         });
@@ -34,7 +35,7 @@
             <div class="well">
                 <div class="form-group">
                     <label>П.І.Б.</label>
-                    <input name="userName" type="text" class="form-control" ng-model="newUser.name" required>
+                    <input name="userName" type="text" class="form-control" ng-model="newUser.name" required autofocus>
                 </div>
                 <div class="form-group">
                     <label>Email:</label>
@@ -42,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label>Телефон:</label>
-                    <input name="userTelephone" type="text" class="form-control" required ng-model="newUser.telephone">
+                    <input name="userTelephone" type="text" class="form-control" required ng-model="newUser.telephone" ui-mask="+38(099) 999-9999"  ui-mask-placeholder ui-mask-placeholder-char="_">
                 </div>
                 <div class="form-group">
                     <label>Пароль:</label>
@@ -57,6 +58,9 @@
                 </button>
             </div>
         </form>
+        <div class="well">
+
+        </div>
     </div>
 
     <div class="col-md-8">
