@@ -65,6 +65,7 @@
             };
 
             $scope.checkUserName = function (value) {
+                if (value.length == 0) return;
                 if(/^[a-zA-Zа-яА-ЯійІЙ']{3,20} [a-zA-Zа-яА-ЯійІЙ' ]{1,20}[a-zA-Zа-яА-ЯійІЙ']{1,20}?$/.test(value) === false){
                     $scope.message = "Неправильно введено П.І.Б.";
                     $scope.myForm.$invalid = true;
