@@ -9,33 +9,92 @@
     <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
 
     <script>
+
+        //function for checking complexity of the password
+        function checkPasswordComplexity(password) {
+            var s_letters = "qwertyuiopasdfghjklzxcvbnm";
+            var b_letters = "QWERTYUIOPLKJHGFDSAZXCVBNM";
+            var digits = "0123456789";
+            var specials = "!@#$%^&*()_-+=\|/.,:;[]{}";
+            var is_s  = false;
+            var is_b  = false;
+            var is_d  = false;
+            var is_sp = false;
+            for (var i = 0; i < password.length; i++) {
+                if (!is_s && s_letters.indexOf(password[i]) != -1) is_s = true;
+                else if (!is_b && b_letters.indexOf(password[i]) != -1) is_b = true;
+                else if (!is_d && digits.indexOf(password[i]) != -1) is_d = true;
+                else if (!is_sp && specials.indexOf(password[i]) != -1) is_sp = true;
+            }
+            var rating = 0;
+            var text = "";
+            if (is_s) rating++;
+            if (is_b) rating++;
+            if (is_d) rating++;
+            if (is_sp) rating++;
+            if (password.length < 6 && rating < 3) text = "Простий";
+            else if (password.length < 6 && rating >= 3) text = "Середній";
+            else if (password.length >= 8 && rating < 3) text = "Середній";
+            else if (password.length >= 8 && rating >= 3) text = "Складний";
+            else if (password.length >= 6 && rating == 1) text = "Простий";
+            else if (password.length >= 6 && rating > 1 && rating < 4) text = "Середній";
+            else if (password.length >= 6 && rating == 4) text = "Складний";
+            return text;
+        }
+
         var courseListApp = angular.module("fifthTaskApp", ['ui.utils']);
 
         courseListApp.controller("formCtrl", function ($scope) {
 
             $scope.userList = [
                   { name : "Testname",  email : "testmail@gmail.com", telephone: "+380962345235", password : "12345" }
-
-        ];
+            ];
 
             $scope.disableForm = true;
-            $scope.message = "";
+            $scope.message     = "";
+            $scope.messagePass = "";
 
             $scope.addNewUser = function (userDetails) {
-                console.log(userDetails);
+                $scope.userList.push({
+                    name: userDetails.name,
+                    email : userDetails.email,
+                    telephone : "+380" + userDetails.telephone,
+                    password : userDetails.password
+                });
+                cleanForm();
             };
 
-
-
             $scope.checkUserName = function (value) {
-                if(/^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/.test(value) === false){
-                    $scope.disableForm = false;
-                    $scope.message = "Неправильно введено імя";
+                if(/^[a-zA-Zа-яА-ЯійІЙ']{3,20} [a-zA-Zа-яА-ЯійІЙ' ]{1,20}[a-zA-Zа-яА-ЯійІЙ']{1,20}?$/.test(value) === false){
+                    $scope.message = "Неправильно введено П.І.Б.";
+                    $scope.myForm.$invalid = true;
                 }else{
-                    $scope.disableForm = true;
                     $scope.message = "";
                 }
+            };
+
+            function cleanForm() {
+                document.getElementById('myForm').reset();
+                $scope.myForm.$invalid = true;
+                document.getElementById('myForm')[0].focus();
+                $scope.message      = "";
+                $scope.messagePass  = "";
             }
+
+            $scope.isEqualPasswords =  function() {
+                var pass1 = $scope.myForm.userPassword.$modelValue;
+                var pass2 = $scope.myForm.userConfirmPassword.$modelValue;
+
+                if (pass1 == undefined) return;
+                if (pass2 == undefined) return;
+
+                if(pass1 != pass2){
+                    $scope.myForm.$invalid = true;
+                    $scope.messagePass = "Паролі не співпадають";
+                }else{
+                    $scope.messagePass = checkPasswordComplexity(pass1) + " пароль";
+                }
+            };
 
         });
 
@@ -44,7 +103,7 @@
 <body>
 <div class="row" style="margin:10px" ng-controller="formCtrl">
     <div  style="width:350px;" class="col-md-4">
-        <form name="myForm" novalidate ng-submit="addNewUser(newUser)">
+        <form name="myForm" id="myForm" novalidate ng-submit="addNewUser(newUser)">
             <div class="well">
                 <div class="form-group">
                     <label>П.І.Б.</label>
@@ -60,19 +119,22 @@
                 </div>
                 <div class="form-group">
                     <label>Пароль:</label>
-                    <input name="userPassword" type="password" class="form-control" required ng-model="newUser.password">
+                    <input name="userPassword" type="password" class="form-control" required ng-model="newUser.password" ng-blur="isEqualPasswords()">
                 </div>
                 <div class="form-group">
                     <label>Підтвердження паролю:</label>
-                    <input name="userConfirmPassword" type="password" class="form-control" required ng-model="newUser.confirmPassword">
+                    <input name="userConfirmPassword" type="password" class="form-control" required ng-model="newUser.confirmPassword" ng-blur="isEqualPasswords()">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block" ng-disabled="( myForm.$invalid && disableForm)">
+                <button type="submit" class="btn btn-primary btn-block" ng-disabled="( myForm.$invalid )">
                     OK
                 </button>
             </div>
         </form>
         <div class="well">
             {{message}}
+        </div>
+        <div class="well">
+            {{messagePass}}
         </div>
     </div>
 
