@@ -1,4 +1,5 @@
-var test = {
+var model = {
+    name : "Мова JavaScript",
     author :"Max",
     questions : [
         {   question : "Що виведе цей код?" ,

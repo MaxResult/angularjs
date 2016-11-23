@@ -6,23 +6,38 @@
     <meta charset="utf-8">
     <script src="../node_modules/angular/angular.js"></script>
     <script src="model.js"></script>
+    <script src="app.js"></script>
     <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
-
-    <script>
-        var courseListApp = angular.module("fourthTaskApp", []);
-
-        courseListApp.controller("TestCtrl", function ($scope) {
-            $scope.data = model;
-
-        });
-
-    </script>
+    <link href="style.css" rel="stylesheet" />
 </head>
 
 <body ng-controller="TestCtrl">
+<div class="container well">
+    <div id="start"   >
+        <div id="" ng-hide="start">
+            <div>Тест: {{test.name}}</div>
+            <div>Автор: {{test.author}}</div>
+            <div>Питань: {{test.questions.length}}</div>
+            <div><button class="btn btn-default" ng-click="startTest()">Розпочати тест</button></div>
+        </div>
 
-<div>
+        <div id="test" ng-show="start">
+
+
+
+            <!-- footer of the test  -->
+            <span ng-repeat="value in test.questions">
+                <input type="radio" name="questionNumber" ng-model="selection" >
+            </span>
+
+
+
+            <div id="clock"></div>
+
+        </div>
+    </div>
+
 
 </div>
 
