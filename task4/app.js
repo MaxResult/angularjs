@@ -14,6 +14,10 @@ testApp.controller("TestCtrl", function ($scope) {
         $scope.start = true;
 
         clock("clock");
+    };
+    
+    $scope.finishTest = function () {
+        
     }
 
 });

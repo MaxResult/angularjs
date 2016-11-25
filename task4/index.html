@@ -46,8 +46,10 @@
             <div class="footer">
                 <span ng-repeat="value in test.questions" >
                 <input type="radio" name="questionNumber" ng-model="$parent.selectedQuestion"  ng-click="setBlockVision(value.id)" value="{{value.id}}"> {{value.id}}
-
-            </span>
+                </span>
+            </div>
+            <div class="finishButton">
+                <button class="btn btn-default" ng-click="finishTest()" ng-disabled="start">Завершити тест</button>
             </div>
             <div id="clock"></div>
         </div>
