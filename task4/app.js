@@ -1,10 +1,17 @@
 var testApp = angular.module("fourthTaskApp", []);
 
 testApp.controller("TestCtrl", function ($scope) {
-    $scope.test = model;
+    $scope.begin = false;
     $scope.start = false;
+    $scope.finishDisable = true;
+    $scope.result = false;
+
+    $scope.test = model;
+
+
     $scope.selectedQuestion = 1;
     $scope.visingBlocks = createArray($scope.test.questions.length);
+    $scope.answers = createAnsersArray($scope.test.questions.length);
 
     $scope.setBlockVision = function (showElem) {
         $scope.visingBlocks = createArray($scope.test.questions.length, showElem);
@@ -12,12 +19,38 @@ testApp.controller("TestCtrl", function ($scope) {
 
     $scope.startTest = function () {
         $scope.start = true;
+        $scope.begin = true;
 
         clock("clock");
     };
     
+    $scope.checkAnswer = function (questionId, answerId) {
+        $scope.answers[questionId] = answerId;
+
+        if(checkIsFinished())
+            $scope.finishDisable = false;
+    };
+    
     $scope.finishTest = function () {
-        
+        $scope.result =  checkResult();
+        $scope.start = false;
+    };
+    
+    function checkIsFinished () {
+        for (var i = 1; i <= $scope.test.questions.length; i++) {
+            if($scope.answers[i] === null)
+               return false;
+        }
+        return true;
+    }
+
+    function checkResult () {
+        var result = 0;
+        for (var i = 0; i < $scope.test.questions.length; i++) {
+            if($scope.test.questions[i].right == $scope.answers[i+1])
+                result++;
+        }
+        return result;
     }
 
 });
@@ -27,6 +60,14 @@ function createArray(count, showingElement) {
     var myArray = [];
     for(var i =1; i <= count; i++){
         myArray[i] = i == showingElement ? true : false;
+    }
+    return myArray;
+}
+
+function createAnsersArray(count) {
+    var myArray = [];
+    for(var i =1; i <= count; i++){
+        myArray[i] = null;
     }
     return myArray;
 }

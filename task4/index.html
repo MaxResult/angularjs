@@ -14,8 +14,8 @@
 
 <body ng-controller="TestCtrl">
 <div class="container well">
-    <div id="start"   >
-        <div id="" ng-hide="start">
+    <div id="start">
+        <div id="" ng-hide="begin">
             <div>Тест: {{test.name}}</div>
             <div>Автор: {{test.author}}</div>
             <div>Питань: {{test.questions.length}}</div>
@@ -32,9 +32,9 @@
                 </div>
 
                 <div class="answers">
-                    <div ng-repeat="answer in value.answers" class="answer">
+                    <div ng-repeat="(key, answer) in value.answers" class="answer">
                     <span>
-                        <input type="radio" name="questionNumber{{value.id}}" />
+                        <input type="radio" name="questionNumber{{value.id}}" ng-click="checkAnswer(value.id, key)"/>
                         {{answer}}
                     </span>
                     </div>
@@ -49,10 +49,15 @@
                 </span>
             </div>
             <div class="finishButton">
-                <button class="btn btn-default" ng-click="finishTest()" ng-disabled="start">Завершити тест</button>
+                <button class="btn btn-default" ng-click="finishTest()" ng-disabled="finishDisable">Завершити тест</button>
             </div>
             <div id="clock"></div>
         </div>
+
+        <div id="result" ng-show="result">
+            <div>Результат: {{result}} / {{test.questions.length}}</div>
+        </div>
+
     </div>
 
 
