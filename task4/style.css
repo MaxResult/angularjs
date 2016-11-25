@@ -1,5 +1,32 @@
 #start{
     padding-top: 150px;
-    height: 400px;
+    height: 500px;
     text-align: center;
+}
+
+.question{
+    margin: 10px 0 10px 0;
+}
+.task{
+    background-color: #a99b92;
+    height: 40px;
+    width: auto;
+    position: absolute;
+    left: 40%;
+    right: 40%;
+
+}
+.answers{
+    margin-top: 50px;
+}
+
+.answer span input{
+    cursor: pointer;
+}
+
+.footer{
+    padding-top: 50px;
+}
+#clock{
+    margin-top: 10px;
 }
