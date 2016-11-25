@@ -24,14 +24,23 @@
 
         <div id="test" ng-show="start">
 
+            <div ng-repeat="value in test.questions" ng-show="visingBlocks[value.id]">
+                <div>{{value.question}}</div>
+                <div>{{value.task}}</div>
 
+                <div ng-repeat="answer in value.answers">
+                    <input type="radio" name="questionNumber{{value.id}}" />
+                    {{answer}}
+                </div>
+            </div>
 
             <!-- footer of the test  -->
             <span ng-repeat="value in test.questions">
-                <input type="radio" name="questionNumber" ng-model="selection" >
+                <input type="radio" name="questionNumber" ng-model="$parent.selectedQuestion"  ng-click="setBlockVision(value.id)" value="{{value.id}}"> {{value.id}}
+
             </span>
 
-
+            <span>{{parent.selectedQuestion}}</span>
 
             <div id="clock"></div>
 
