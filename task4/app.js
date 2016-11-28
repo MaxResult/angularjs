@@ -1,11 +1,10 @@
 var testApp = angular.module("fourthTaskApp", []);
 
 testApp.controller("TestCtrl", function ($scope) {
-    $scope.begin = false;
-    $scope.start = false;
+
     $scope.finishDisable = true;
-    $scope.result = false;
-    $scope.showResult = false;
+    $scope.showClock = true;
+    $scope.result = "";
     $scope.test = model;
 
     $scope.showBlock = "begin";
@@ -21,6 +20,7 @@ testApp.controller("TestCtrl", function ($scope) {
     $scope.startTest = function () {
         $scope.showBlock = "start";
         clock("clock");
+        $scope.showClock = true;
     };
     
     $scope.checkAnswer = function (questionId, answerId) {
@@ -33,6 +33,7 @@ testApp.controller("TestCtrl", function ($scope) {
     $scope.finishTest = function () {
         $scope.result =  checkResult();
         $scope.showBlock = "result";
+        $scope.showClock = false;
     };
     
     function checkIsFinished () {
@@ -104,9 +105,3 @@ var clock = function (id) {
         },1000);
     }(id);
 };
-
-
-
-
-
-
