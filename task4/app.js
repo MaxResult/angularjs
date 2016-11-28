@@ -5,9 +5,10 @@ testApp.controller("TestCtrl", function ($scope) {
     $scope.start = false;
     $scope.finishDisable = true;
     $scope.result = false;
-
+    $scope.showResult = false;
     $scope.test = model;
 
+    $scope.showBlock = "begin";
 
     $scope.selectedQuestion = 1;
     $scope.visingBlocks = createArray($scope.test.questions.length);
@@ -18,9 +19,7 @@ testApp.controller("TestCtrl", function ($scope) {
     };
 
     $scope.startTest = function () {
-        $scope.start = true;
-        $scope.begin = true;
-
+        $scope.showBlock = "start";
         clock("clock");
     };
     
@@ -33,7 +32,7 @@ testApp.controller("TestCtrl", function ($scope) {
     
     $scope.finishTest = function () {
         $scope.result =  checkResult();
-        $scope.start = false;
+        $scope.showBlock = "result";
     };
     
     function checkIsFinished () {
@@ -71,11 +70,14 @@ function createAnsersArray(count) {
     }
     return myArray;
 }
-
 var clock = function (id) {
     var seconds = 0;
     var hours = 0;
     var minutes = 0;
+    
+    console.log(id);
+    var clock = document.getElementById(id);
+    console.log(clock);
 
     function getTime(){
         seconds++;

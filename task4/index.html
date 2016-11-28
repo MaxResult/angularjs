@@ -14,15 +14,15 @@
 
 <body ng-controller="TestCtrl">
 <div class="container well">
-    <div id="start">
-        <div id="begin" ng-hide="begin">
+    <div id="start" ng-switch on="showBlock">
+        <div id="begin" ng-switch-when="begin" ><!-- ng-hide="begin"-->
             <div>Тест: {{test.name}}</div>
             <div>Автор: {{test.author}}</div>
             <div>Питань: {{test.questions.length}}</div>
             <div style="padding-top: 10px;"><button style="font-size: 17px;" class="btn btn-default" ng-click="startTest()">Розпочати тест</button></div>
         </div>
 
-        <div id="test" ng-show="start">
+        <div id="test" ng-switch-when="start"><!-- ng-show="start" -->
             <div id="testBlock">
                 <div ng-repeat="value in test.questions" ng-show="visingBlocks[value.id]" >
                     <div class="question">{{value.question}}</div>
@@ -60,7 +60,7 @@
 
         </div>
 
-        <div id="result" ng-show="result">
+        <div id="result" ng-switch-when="result"> <!--  ng-show="showResult" -->
             <div>Результат: {{result}} / {{test.questions.length}}</div>
         </div>
 
