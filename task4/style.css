@@ -1,23 +1,38 @@
 #start{
-    padding-top: 150px;
+    padding-top: 50px;
     height: 500px;
     text-align: center;
 }
 
+#begin{
+    padding-top: 50px;
+}
+
+#testBlock{
+    height: auto;
+    width: auto;
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    padding-top: 10px;
+    text-align: left;
+}
+
 .question{
+    font-size: 24px;
     margin: 10px 0 10px 0;
 }
 .task{
-    background-color: #a99b92;
-    height: 40px;
-    width: auto;
-    position: absolute;
-    left: 40%;
-    right: 40%;
-
+    background-color: #ccc;
 }
+
+.divTask{
+    height: 25px;
+}
+
 .answers{
-    margin-top: 50px;
+    margin-top: 15px;
+    height: 150px;
 }
 
 .answer span input{
@@ -26,6 +41,10 @@
 
 .footer{
     padding-top: 20px;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    text-align: left;
 }
 #clock{
     margin-top: 10px;
@@ -33,4 +52,31 @@
 
 .finishButton{
     padding-top: 10px;
+    padding-left: 10%;
+}
+
+.footer input[type=radio] {
+    display:none;
+    margin:10px;
+}
+
+.footer input[type=radio] + label {
+    display:inline-block;
+    margin:-2px;
+    padding: 4px 12px;
+    background-color: #e7e7e7;
+    border-color: #ddd;
+}
+
+.footer input[type=radio]:checked + label {
+    background-image: none;
+    background-color:#d0d0d0;
+}
+
+.container div{
+    font-size: 18px;
+}
+
+.container div .question{
+    font-size: 24px;
 }
