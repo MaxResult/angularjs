@@ -74,10 +74,7 @@ var clock = function (id) {
     var seconds = 0;
     var hours = 0;
     var minutes = 0;
-    
-    console.log(id);
-    var clock = document.getElementById(id);
-    console.log(clock);
+
 
     function getTime(){
         seconds++;

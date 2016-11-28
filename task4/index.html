@@ -42,23 +42,20 @@
                 </div>
                 <!-- footer of the test  -->
                 <div class="footer">
-                <span ng-repeat="value in test.questions">
-                    <input type="radio" name="questionNumber" ng-model="$parent.selectedQuestion"  ng-click="setBlockVision(value.id)" value="{{value.id}}" id="{{value.id}}">
-                    <label   class="btn" for="{{value.id}}">
-                     {{value.id}}
-                </label>
-                </span>
-                <div class="finishButton">
-                    <button class="btn btn-default" ng-click="finishTest()" ng-disabled="finishDisable">Завершити тест</button>
-                </div>
-                <div id="clock"></div>
-                </div>
+                    <span ng-repeat="value in test.questions">
+                        <input type="radio" name="questionNumber" ng-model="$parent.selectedQuestion"  ng-click="setBlockVision(value.id)" value="{{value.id}}" id="{{value.id}}">
+                        <label   class="btn" for="{{value.id}}">
+                         {{value.id}}
+                    </label>
+                    </span>
+                    <div class="finishButton">
+                        <button class="btn btn-default" ng-click="finishTest()" ng-disabled="finishDisable">Завершити тест</button>
+                    </div>
 
-
+                </div>
             </div>
-
-
         </div>
+
 
         <div id="result" ng-switch-when="result"> <!--  ng-show="showResult" -->
             <div>Результат: {{result}} / {{test.questions.length}}</div>
@@ -66,6 +63,7 @@
 
     </div>
 
+    <div id="clock"></div>
 
 </div>
 
