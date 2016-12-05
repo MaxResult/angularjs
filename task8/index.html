@@ -10,12 +10,9 @@
         angular.module("eightApp", [])
                 .controller("filterCtrl", function ($scope) {
                     $scope.diary = [
-                        { title: "Item 1", description: "sdfsdfsdf", date: "Category 1" },
-                        { title: "Item 2", description: "sdfsdfsdf", date: "Category 2" },
+                        { title: "Item 1", description: "sdfsdfsdf", date: "01-11-2016" },
+                        { title: "Item 2", description: "sdfsdfsdf", date: "05-11-2016" },
                     ];
-
-                    $scope.currentCategory = "Category 2";
-
 
                     $scope.title        = "";
                     $scope.description  = "";
@@ -27,7 +24,7 @@
                             $scope.diary.push({
                                 title: $scope.title,
                                 description: $scope.description,
-                                date: $scope.date
+                                date: returnDate($scope.date)
                             });
                             cleanForm();
                         }
@@ -38,6 +35,17 @@
                                 return true;
                         else
                                 return false;
+                    }
+
+                    function returnDate(value) {
+                        var d = new Date(value);
+                        var curr_date = d.getDate();
+                        var curr_month = d.getMonth() + 1;
+                        var curr_year = d.getFullYear();
+                        curr_date  =  (curr_date<10 ) ? "0"+curr_date  : curr_date;
+                        curr_month = (curr_month<10 ) ? "0"+curr_month : curr_month;
+
+                        return curr_date + "-" + curr_month + "-" + curr_year;
                     }
 
                     function cleanForm(){
@@ -53,14 +61,14 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3>
-            Items in cart
-            <span class="label label-info">{{items.length}}</span>
+            Notes in diary
+            <span class="label label-info">{{category.length}}</span>
         </h3>
 
     </div>
     <div>
         <select ng-model="currentCategory" class="form-control">
-            <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
+            <option ng-repeat="category in categories " value="{{category.name}}">{{category.name}}</option>
         </select>
     </div>
     <br>
@@ -73,7 +81,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in diary">
+        <tr ng-repeat="item in diary | orderBy : 'date'">
             <td>{{item.title}}</td>
             <td>{{item.description}}</td>
             <td>{{item.date}}</td>
@@ -100,7 +108,7 @@
         <div class="form-group">
             <label for="date" class="col-sm-1 control-label">Date</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="date" placeholder="date" ng-model="date">
+                <input type="date" class="form-control" id="date" placeholder="date" ng-model="date" value="2016-12-05">
             </div>
         </div>
         <div class="form-group">
