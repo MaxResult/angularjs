@@ -21,6 +21,43 @@
 
                     $scope.currentCategory = "Category 2";
 
+                    $scope.categories = [
+                        {name : "Category 1"},
+                        {name : "Category 2"},
+                        {name : "Category 3"}
+                    ];
+
+                    $scope.name     = "";
+                    $scope.price    = "";
+                    $scope.category = "";
+                    $scope.count    = "";
+
+                    $scope.addNew = function () {
+                        if(checkParams()) {
+
+                            $scope.items.push({
+                                name: $scope.name,
+                                price: $scope.price,
+                                category: $scope.category,
+                                count: $scope.count
+                            });
+                            cleanForm();
+                        }
+                    };
+
+                    function checkParams() {
+                        if($scope.name != "" && $scope.price != "" && $scope.category != "" && $scope.count !="")
+                                return true;
+                        else
+                                return false;
+                    }
+
+                    function cleanForm(){
+                        $scope.name     = "";
+                        $scope.price    = "";
+                        $scope.category = "";
+                        $scope.count    = "";
+                    }
                 });
     </script>
 </head>
@@ -36,9 +73,7 @@
     </div>
     <div>
         <select ng-model="currentCategory" class="form-control">
-            <option value="Category 1">Category 1</option>
-            <option value="Category 2">Category 2</option>
-            <option value="Category 3">Category 3</option>
+            <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
         </select>
     </div>
     <br>
@@ -52,7 +87,6 @@
         </tr>
         </thead>
         <tbody>
-
         <tr ng-repeat="item in items | filter: { category : currentCategory}">
             <td>{{item.name}}</td>
             <td>{{item.price | currency}}</td>
@@ -61,7 +95,42 @@
         </tr>
         </tbody>
     </table>
-
 </div>
+<div>
+    <h3>Add new</h3>
+    <form name="myForm" novalidate class="form-horizontal">
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="name" placeholder="name" ng-model="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price" class="col-sm-1 control-label">Price</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="price" placeholder="price" ng-model="price">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="category" class="col-sm-1 control-label">Category</label>
+            <div class="col-sm-6">
+                <select ng-model="category" id="category" class="form-control">
+                    <option ng-repeat="category in categories" value="{{category.name}}">{{category.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="count" class="col-sm-1 control-label">Count</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="count" placeholder="count" ng-model="count">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="count" class="col-sm-6 control-label"></label>
+            <button type="submit" class="btn btn-default" ng-click="addNew(price)">Submit</button>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>
