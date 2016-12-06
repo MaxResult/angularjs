@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="tenthApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Filter | Diary</title>
+    <script src="../node_modules/angular/angular.js"></script>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <script>
+        angular.module("tenthApp", [])
+                .controller("filterCtrl", function ($scope) {
+                    $scope.numbers = [17,4,2,5,6,8,1,99,10,11];
+
+                    $scope.orderByOdd = function (item) {
+                        return (item % 2 == 0 ) ? 0 : item;
+                    };
+
+                });
+    </script>
+</head>
+<body ng-controller="filterCtrl">
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+            <h3>
+                Count
+                <span class="label label-info">{{numbers.length}}</span>
+            </h3>
+    </div>
+</div>
+<div>
+    <ul>
+        <li ng-repeat="item in numbers | orderBy:orderByOdd">{{item}}</li>
+    </ul>
+</div>
+
+
+
+
+</body>
+</html>
