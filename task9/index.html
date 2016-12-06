@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="eightApp">
+<html lang="en" ng-app="ninthApp">
 <head>
     <meta charset="UTF-8">
     <title>Filter | Diary</title>
@@ -7,16 +7,18 @@
     <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="../node_modules/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
     <script>
-        angular.module("eightApp", [])
+        angular.module("ninthApp", [])
                 .controller("filterCtrl", function ($scope) {
                     $scope.diary = [
-                        { title: "Item 1", description: "sdfsdfsdf", date: "01-11-2016" },
-                        { title: "Item 2", description: "sdfsdfsdf", date: "05-11-2016" },
+                        { title: "Item 1", description: "description 14", date: "01-11-2016" },
+                        { title: "Item 2", description: "description 10", date: "05-11-2016" },
+                        { title: "Item 3", description: "description 30", date: "05-10-2016" },
+                        { title: "Item 4", description: "description 14", date: "05-09-2016" },
+                        { title: "Item 5", description: "description 5", date: "05-08-2016" },
+                        { title: "Item 6", description: "description 9", date: "05-07-2016" },
+                        { title: "Item 7", description: "description 79", date: "05-06-2016" }
                     ];
 
-                    $scope.title        = "";
-                    $scope.description  = "";
-                    $scope.date         = "";
 
                     $scope.addNew = function () {
                         if(checkParams()) {
@@ -28,6 +30,7 @@
                             });
                             cleanForm();
                             document.getElementById("title").focus();
+                            createLimitRange();
                         }
                     };
 
@@ -54,6 +57,29 @@
                         $scope.description  = "";
                         $scope.date         = "";
                     }
+
+                    $scope.limitValue = "3";
+
+                    function createLimitRange() {
+                        $scope.limitRange = [];
+
+                        for (var i = 0 ; i <= $scope.diary.length; i++) {
+                            $scope.limitRange.push(i.toString());
+                        }
+                    }
+
+                    //initialize of component
+                    (function init() {
+                        $scope.title        = "";
+                        $scope.description  = "";
+                        $scope.date         = "";
+                        $scope.orderBy      = "date";
+
+                        createLimitRange();
+
+                        $scope.orderRange = ['title', 'description', 'date'];
+
+                    })();
                 });
     </script>
 </head>
@@ -61,10 +87,19 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3>
-            Notes in diary
-            <span class="label label-info">{{diary.length}}</span>
-        </h3>
+            <h3>
+                Notes in diary
+                <span class="label label-info">{{diary.length}}</span>
+            </h3>
+    </div>
+    <div class="form-group">
+
+            <h3 class="col-sm-6">
+                <p>Limit: <select class="text-info" ng-model="limitValue" ng-options="item for item in limitRange"></select></p>
+            </h3>
+            <h3 class="col-sm-6">
+                <p>Sorted by: <select class="text-info" ng-model="orderBy" ng-options="item for item in orderRange"></select></p>
+            </h3>
 
     </div>
     <br>
@@ -77,7 +112,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in diary | orderBy : 'date'">
+        <tr ng-repeat="item in diary | orderBy : orderBy | limitTo:limitValue">
             <td>{{item.title}}</td>
             <td>{{item.description}}</td>
             <td>{{item.date}}</td>
