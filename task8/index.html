@@ -10,8 +10,8 @@
         angular.module("eightApp", [])
                 .controller("filterCtrl", function ($scope) {
                     $scope.diary = [
-                        { title: "Item 1", description: "sdfsdfsdf", date: "01-11-2016" },
-                        { title: "Item 2", description: "sdfsdfsdf", date: "05-11-2016" },
+                        { title: "Item 1", description: "description 1", date: "01-11-2016" },
+                        { title: "Item 2", description: "description 2", date: "05-11-2016" },
                     ];
 
                     $scope.title        = "";
@@ -24,7 +24,7 @@
                             $scope.diary.push({
                                 title: $scope.title,
                                 description: $scope.description,
-                                date: returnDate($scope.date)
+                                date: $scope.date
                             });
                             cleanForm();
                             document.getElementById("title").focus();
@@ -38,16 +38,6 @@
                                 return false;
                     }
 
-                    function returnDate(value) {
-                        var d = new Date(value);
-                        var curr_date = d.getDate();
-                        var curr_month = d.getMonth() + 1;
-                        var curr_year = d.getFullYear();
-                        curr_date  =  (curr_date<10 ) ? "0"+curr_date  : curr_date;
-                        curr_month = (curr_month<10 ) ? "0"+curr_month : curr_month;
-
-                        return curr_date + "-" + curr_month + "-" + curr_year;
-                    }
 
                     function cleanForm(){
                         $scope.title        = "";
@@ -80,7 +70,7 @@
         <tr ng-repeat="item in diary | orderBy : 'date'">
             <td>{{item.title}}</td>
             <td>{{item.description}}</td>
-            <td>{{item.date}}</td>
+            <td>{{item.date | date : "dd-MM-yyyy"}}</td>
         </tr>
         </tbody>
     </table>

@@ -22,11 +22,10 @@
 
                     $scope.addNew = function () {
                         if(checkParams()) {
-
                             $scope.diary.push({
                                 title: $scope.title,
                                 description: $scope.description,
-                                date: returnDate($scope.date)
+                                date: $scope.date
                             });
                             cleanForm();
                             document.getElementById("title").focus();
@@ -41,24 +40,12 @@
                                 return false;
                     }
 
-                    function returnDate(value) {
-                        var d = new Date(value);
-                        var curr_date = d.getDate();
-                        var curr_month = d.getMonth() + 1;
-                        var curr_year = d.getFullYear();
-                        curr_date  =  (curr_date<10 ) ? "0"+curr_date  : curr_date;
-                        curr_month = (curr_month<10 ) ? "0"+curr_month : curr_month;
-
-                        return curr_date + "-" + curr_month + "-" + curr_year;
-                    }
-
                     function cleanForm(){
                         $scope.title        = "";
                         $scope.description  = "";
                         $scope.date         = "";
                     }
 
-                    $scope.limitValue = "3";
 
                     function createLimitRange() {
                         $scope.limitRange = [];
@@ -74,6 +61,7 @@
                         $scope.description  = "";
                         $scope.date         = "";
                         $scope.orderBy      = "date";
+                        $scope.limitValue = "3";
 
                         createLimitRange();
 
@@ -115,7 +103,7 @@
         <tr ng-repeat="item in diary | orderBy : orderBy | limitTo:limitValue">
             <td>{{item.title}}</td>
             <td>{{item.description}}</td>
-            <td>{{item.date}}</td>
+            <td>{{item.date | date : "dd-MM-yyyy"}}</td>
         </tr>
         </tbody>
     </table>
