@@ -14,16 +14,15 @@
 
                 }).filter("orderByOdd", function () {
                     return function (item) {
-
                         var even = [];
                         var odd = [];
 
                         for (var key in item) {
                             var elem = item[key];
                             if (elem % 2 == 0)
-                                even[key] = elem;
+                                even.push(elem);
                             else
-                                odd[key] = elem;
+                                odd.push(elem);
                         }
 
                         even.sort(function (a, b) {
