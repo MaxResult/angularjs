@@ -12,11 +12,36 @@
                     $scope.numbers = [17,4,2,5,6,8,1,99,10,11];
                     $scope.arrayNumeric = [];
 
+                }).filter("orderByOdd", function () {
+                    return function (item) {
 
-                    $scope.orderByOdd = function (item) {
-                        return (item % 2 == 0 ) ? item / 100  : item;
-                    };
+                        var clone = [];
+                        for (var key in item) {
+                            clone[key] = item[key];
+                        }
 
+                        return clone.sort(function(a, b){
+                            var first = false;
+                            var second = false;
+                            if (a % 2 == 0 ) {
+                                first = true;
+                            }
+                            if(b % 2 == 0 ){
+                                second = true;
+                            }
+                            if(first && second == true){
+                                if (a > b) return 1;
+                                if (a < b) return -1;
+                            }else if(first == true && second == false){
+                                return -1;
+                            }else if(first == false && second == true){
+                                return 1;
+                            }else{
+                                if (a > b) return 1;
+                                if (a < b) return -1;
+                            }
+                        });
+                    }
                 });
     </script>
 </head>
@@ -42,7 +67,7 @@
     <div class="col-sm-1">
         Destination
         <ul>
-            <li ng-repeat="item in numbers | orderBy:orderByOdd">{{item}}</li>
+            <li ng-repeat="item in numbers | orderByOdd">{{item}}</li>
         </ul>
     </div>
 </div>
