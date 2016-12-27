@@ -3,8 +3,8 @@ var testApp = angular.module("thirteenth", []);
 testApp.controller("directiveCtrl", function ($scope) {
     $scope.data = [
         {title: 'Action', url: 'index.html'},
-        {title: 'Another action', url: '#'},
-        {title: 'habrahabr', url: '#'}
+        {title: 'Another action', url: '#action'},
+        {title: 'habrahabr', url: '#habrahabr'}
     ];
 });
 
