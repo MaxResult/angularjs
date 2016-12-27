@@ -18,10 +18,3 @@ testApp.directive('paragraphs', [function () {
     }
 
 }]);
-
-
-
-const app = angular.module('myApp', ['myApp.directives']);
-app.controller('myCtrl', function($scope) {
-    $scope.data = ['p1', 'p2'];
-});
